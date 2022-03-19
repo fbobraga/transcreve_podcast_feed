@@ -9,6 +9,8 @@ import srt
 import json
 import datetime
 
+# ainda falta o https://www.tutorialspoint.com/python_text_processing/python_reading_rss_feed.htm
+
 SetLogLevel(-1)
 
 if not os.path.exists("model"):
