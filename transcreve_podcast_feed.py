@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from vosk import Model, KaldiRecognizer, SetLogLevel
+import feedparser
 import sys
 import os
 import wave
@@ -9,26 +10,18 @@ import srt
 import json
 import datetime
 
-# ainda falta o https://www.tutorialspoint.com/python_text_processing/python_reading_rss_feed.htm
-
 SetLogLevel(-1)
+
+if len(sys.argv) != 3:
+   print('Uso:')
+   print('python3 {} <URL do feed> <diretório de saida>'.format(sys.argv[0]))
+   exit(1)
 
 if not os.path.exists("model"):
     print ("Please download the model from https://alphacephei.com/vosk/models and unpack as 'model' in the current folder.")
     exit (1)
 
-sample_rate=16000
-model = Model("model")
-rec = KaldiRecognizer(model, sample_rate)
-rec.SetWords(True)
-
-process = subprocess.Popen(['ffmpeg', '-loglevel', 'quiet', '-i',
-                            sys.argv[1],
-                            '-ar', str(sample_rate) , '-ac', '1', '-f', 's16le', '-'],
-                            stdout=subprocess.PIPE)
-
-
-WORDS_PER_LINE = 7
+WORDS_PER_LINE = 30
 
 def transcribe():
     results = []
@@ -54,5 +47,17 @@ def transcribe():
                    end=datetime.timedelta(seconds=line[-1]['end']))
            subs.append(s)
     return subs
+
+sample_rate=16000
+model = Model("model")
+rec = KaldiRecognizer(model, sample_rate)
+rec.SetWords(True)
+
+# pra cada episódio
+
+process = subprocess.Popen(['ffmpeg', '-loglevel', 'quiet', '-i',
+                            sys.argv[1],
+                            '-ar', str(sample_rate) , '-ac', '1', '-f', 's16le', '-'],
+                            stdout=subprocess.PIPE)
 
 print (srt.compose(transcribe()))
