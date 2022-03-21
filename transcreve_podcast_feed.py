@@ -9,6 +9,7 @@ import subprocess
 import srt
 import json
 import datetime
+import requests
 
 SetLogLevel(-1)
 
@@ -21,7 +22,7 @@ if not os.path.exists("model"):
     print ("Please download the model from https://alphacephei.com/vosk/models and unpack as 'model' in the current folder.")
     exit (1)
 
-WORDS_PER_LINE = 30
+WORDS_PER_LINE = 20
 
 def transcribe():
     results = []
@@ -53,11 +54,28 @@ model = Model("model")
 rec = KaldiRecognizer(model, sample_rate)
 rec.SetWords(True)
 
-# pra cada episódio
+if os.path.exists('/tmp/semaforo_transcreve_podcast_feed'):
+    print ('já em processamento')
+    exit (1)
+arq_semaforo = open('/tmp/semaforo_transcreve_podcast_feed', 'w')
+arq_semaforo.write('em execução')
+arq_semaforo.close()
 
-process = subprocess.Popen(['ffmpeg', '-loglevel', 'quiet', '-i',
-                            sys.argv[1],
-                            '-ar', str(sample_rate) , '-ac', '1', '-f', 's16le', '-'],
-                            stdout=subprocess.PIPE)
+feed = feedparser.parse(sys.argv[1])
 
-print (srt.compose(transcribe()))
+for i in feed.entries:
+    print('Tratando "{}"...'.format(i['title']))
+    print('Fazendo download...')
+    r = requests.get(i['links'][1]['href'])
+    open('/tmp/arq_media_podcast', 'wb').write(r.content)
+    print('Processando...')
+    process = subprocess.Popen(['ffmpeg', '-loglevel', 'quiet', '-i',
+                                '/tmp/arq_media_podcast',
+                                '-ar', str(sample_rate) , '-ac', '1', '-f', 's16le', '-'],
+                                stdout=subprocess.PIPE)
+    nome_arq_saida = i['title'].replace('/', '_')
+    arq_saida = open('{}/{}'.format(sys.argv[2], nome_arq_saida), 'w')
+    arq_saida.write(srt.compose(transcribe()))
+    arq_saida.close()
+
+os.remove('/tmp/semaforo_transcreve_podcast_feed')
