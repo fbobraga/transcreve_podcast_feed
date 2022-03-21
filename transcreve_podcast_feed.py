@@ -66,7 +66,7 @@ feed = feedparser.parse(sys.argv[1])
 for i in feed.entries:
     print('Tratando "{}"...'.format(i['title']))
     nome_arq_saida = i['title'].replace('/', '_')
-    if not os.path.exists('{}/{}'.format(sys.argv[2], nome_arq_saida):
+    if not os.path.exists('{}/{}'.format(sys.argv[2], nome_arq_saida)):
         print('Fazendo download...')
         r = requests.get(i['links'][1]['href'])
         open('/tmp/arq_media_podcast', 'wb').write(r.content)
