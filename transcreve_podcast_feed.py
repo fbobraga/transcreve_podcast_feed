@@ -77,5 +77,6 @@ for i in feed.entries:
     arq_saida = open('{}/{}'.format(sys.argv[2], nome_arq_saida), 'w')
     arq_saida.write(srt.compose(transcribe()))
     arq_saida.close()
+    os.remove('/tmp/arq_media_podcast')
 
 os.remove('/tmp/semaforo_transcreve_podcast_feed')
