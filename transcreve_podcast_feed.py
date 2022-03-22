@@ -57,7 +57,7 @@ rec.SetWords(True)
 if os.path.exists('/tmp/semaforo_transcreve_podcast_feed.{}'.format(sys.argv[2])):
     print ('já em processamento')
     exit (1)
-arq_semaforo = open('/tmp/semaforo_transcreve_podcast_feed', 'w')
+arq_semaforo = open('/tmp/semaforo_transcreve_podcast_feed.{}'.format(sys.argv[2]), 'w')
 arq_semaforo.write('em execução')
 arq_semaforo.close()
 
