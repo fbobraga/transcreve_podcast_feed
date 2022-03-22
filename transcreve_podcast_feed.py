@@ -54,7 +54,7 @@ model = Model("model")
 rec = KaldiRecognizer(model, sample_rate)
 rec.SetWords(True)
 
-if os.path.exists('/tmp/semaforo_transcreve_podcast_feed'):
+if os.path.exists('/tmp/semaforo_transcreve_podcast_feed.{}'.format(sys.argv[2])):
     print ('já em processamento')
     exit (1)
 arq_semaforo = open('/tmp/semaforo_transcreve_podcast_feed', 'w')
@@ -81,4 +81,4 @@ for i in feed.entries:
         arq_saida.close()
     os.remove('/tmp/arq_media_podcast')
 
-os.remove('/tmp/semaforo_transcreve_podcast_feed')
+os.remove('/tmp/semaforo_transcreve_podcast_feed.{}'.format(sys.argv[2]))
