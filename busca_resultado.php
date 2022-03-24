@@ -5,7 +5,7 @@
 </title>
 <body>
     <?php
-    exec('grep -B 1 "' . . '" *', $retArr, $retVal);
+    exec('grep -B 1 "' . $_GET['texto_busca'] . '" *', $retArr, $retVal);
 
     foreach ($retArr as $linha)
         {
