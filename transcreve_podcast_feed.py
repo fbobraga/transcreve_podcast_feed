@@ -79,7 +79,6 @@ for i in feed.entries:
         arq_saida = open('{}/{}'.format(sys.argv[2].replace('/', '_'), nome_arq_saida), 'w')
         arq_saida.write(srt.compose(transcribe()))
         arq_saida.close()
-    if os.path.exists('/tmp/arq_media_podcast.{}'.format(sys.argv[2].replace('/', '_'))):
         os.remove('/tmp/arq_media_podcast.{}'.format(sys.argv[2].replace('/', '_')))
 
 os.remove('/tmp/semaforo_transcreve_podcast_feed.{}'.format(sys.argv[2].replace('/', '_')))
