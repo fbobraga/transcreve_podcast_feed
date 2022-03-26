@@ -11,3 +11,4 @@ https://jowsuplementos.com.br/busca_viracasacas/
 https://jowsuplementos.com.br/busca_primeiro_cafe/
 https://jowsuplementos.com.br/busca_midcast
 https://jowsuplementos.com.br/busca_xadrez_verbal/
+https://jowsuplementos.com.br/busca_jornalismos/
