@@ -4,6 +4,8 @@
     Resultados da busca
 </title>
 <body>
+    Resultado da busca:<br>
+    <br>
     <?php
     exec('grep -B 1 "' . $_GET['texto_busca'] . '" *', $retArr, $retVal);
 
