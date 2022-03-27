@@ -53,11 +53,12 @@ sample_rate=16000
 model = Model("model")
 rec = KaldiRecognizer(model, sample_rate)
 rec.SetWords(True)
+sufixo_nome_arq = sys.argv[2].replace('/', '_')
 
-if os.path.exists('/tmp/semaforo_transcreve_podcast_feed.{}'.format(sys.argv[2])):
+if os.path.exists('/tmp/semaforo_transcreve_podcast_feed.{}'.format(sufixo_nome_arq)):
     print ('já em processamento')
     exit (1)
-arq_semaforo = open('/tmp/semaforo_transcreve_podcast_feed.{}'.format(sys.argv[2]), 'w')
+arq_semaforo = open('/tmp/semaforo_transcreve_podcast_feed.{}'.format(sufixo_nome_arq), 'w')
 arq_semaforo.write('em execução')
 arq_semaforo.close()
 
@@ -66,10 +67,10 @@ feed = feedparser.parse(sys.argv[1])
 for i in feed.entries:
     print('Tratando "{}"...'.format(i['title']))
     nome_arq_saida = i['title'].replace('/', '_')
-    if not os.path.exists('{}/{}'.format(sys.argv[2].replace('/', '_'), nome_arq_saida)):
+    if not os.path.exists('{}/{}'.format(sys.argv[2], nome_arq_saida)):
         print('Fazendo download...')
         r = requests.get(i['links'][1]['href'])
-        open('/tmp/arq_media_podcast.{}'.format(sys.argv[2].replace('/', '_')), 'wb').write(r.content)
+        open('/tmp/arq_media_podcast.{}'.format(sufixo_nome_arq), 'wb').write(r.content)
         print('Processando...')
         process = subprocess.Popen(['ffmpeg', '-loglevel', 'quiet', '-i',
                                     '/tmp/arq_media_podcast.{}'.format(sys.argv[2].replace('/', '_')),
@@ -79,6 +80,6 @@ for i in feed.entries:
         arq_saida = open('{}/{}'.format(sys.argv[2].replace('/', '_'), nome_arq_saida), 'w')
         arq_saida.write(srt.compose(transcribe()))
         arq_saida.close()
-        os.remove('/tmp/arq_media_podcast.{}'.format(sys.argv[2].replace('/', '_')))
+        os.remove('/tmp/arq_media_podcast.{}'.format(sufixo_nome_arq))
 
-os.remove('/tmp/semaforo_transcreve_podcast_feed.{}'.format(sys.argv[2].replace('/', '_')))
+os.remove('/tmp/semaforo_transcreve_podcast_feed.{}'.format(sufixo_nome_arq))
