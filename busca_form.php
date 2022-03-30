@@ -11,7 +11,7 @@
 <b>Episódios transcritos:</b><br>
 <br>
 <?php
-exec('ls * | grep -v ".php" | sort', $retArr, $retVal);
+exec('ls * | grep -v .php | sort', $retArr, $retVal);
 
 foreach ($retArr as $linha)
     {
