@@ -6,10 +6,11 @@ depende também do ffmpeg instalado (pra converter os arquivos de áudio pra for
 
 Buscas de teste em transcrições geradas (execução local e resultado enviado para buscas, para pessoal dos podcasts verem resultado - a ideia é fazer algo automático, em servidor):
 
-https://jowsuplementos.com.br/busca_medo_e_delirio/
-https://jowsuplementos.com.br/busca_viracasacas/
-https://jowsuplementos.com.br/busca_primeiro_cafe/
-https://jowsuplementos.com.br/busca_midcast
-https://jowsuplementos.com.br/busca_xadrez_verbal/
-https://jowsuplementos.com.br/busca_jornalismos/
-https://jowsuplementos.com.br/busca_batecast/
+* https://jowsuplementos.com.br/busca_medo_e_delirio/
+* https://jowsuplementos.com.br/busca_viracasacas/
+* https://jowsuplementos.com.br/busca_primeiro_cafe/
+* https://jowsuplementos.com.br/busca_midcast
+* https://jowsuplementos.com.br/busca_xadrez_verbal/
+* https://jowsuplementos.com.br/busca_jornalismos/
+* https://jowsuplementos.com.br/busca_batecast/
+* https://jowsuplementos.com.br/busca_petit_jornal/
