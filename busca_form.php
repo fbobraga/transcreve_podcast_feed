@@ -11,7 +11,11 @@
 <b>Episódios transcritos:</b><br>
 <br>
 <?php
+<<<<<<< HEAD
 exec('ls * | grep -v ".php" | sort', $retArr, $retVal);
+=======
+exec('ls -I *.php * | sort', $retArr, $retVal);
+>>>>>>> a223bb1beb69a854f73ba837188df176e2283211
 
 foreach ($retArr as $linha)
     {
