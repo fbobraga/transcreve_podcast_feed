@@ -9,5 +9,4 @@ Buscas de teste em transcrições geradas (execução local e resultado enviado 
 * https://jowsuplementos.com.br/busca_medo_e_delirio/
 * https://jowsuplementos.com.br/busca_viracasacas/
 * https://jowsuplementos.com.br/busca_midcast
-* https://jowsuplementos.com.br/busca_xadrez_verbal/
 * https://jowsuplementos.com.br/busca_petit_jornal/
